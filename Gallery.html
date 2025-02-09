@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest-Style Photo Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+    /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main {
+    flex: 1; /* Expands to fill the remaining space between the header and footer */
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: linear-gradient(135deg, #bfff50, #4169E1); */
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: antiquewhite;
+    color: #333;
+}
+.blur-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Optional overlay for darkening */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  z-index: -1; /* Make sure the filter is applied behind the content */
+}
+
+.gallery {
+    position: relative;
+    /* background: rgba(59, 28, 28, 0.5); */
+    backdrop-filter: blur(10px); /* Blurring the background */
+    max-width: 1200px;
+    margin: 0 auto;
+    column-count: 4;
+    font-family: Arial;
+}
+
+/* Navigation Bar */
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0; /* Align to left */
+    width: 100%;
+    height: 60px; /* Adjust height of the navbar */
+    background: linear-gradient(135deg, #11042ee6, rgba(90, 28, 213, 0.9)); /* Gradient background */
+    backdrop-filter: blur(10px); /* Apply blur to the background */
+    z-index: 10;
+    transition: transform 0.3s ease; /* Smooth transition for sliding effect */
+    box-shadow: 0 4px 6px rgba(224, 11, 11, 0.1); /* Subtle shadow for depth */
+}
+
+
+
+/* Gallery Section */
+.gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  column-count: 2;
+  font-family: arial;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+.gallery-item figure {
+  margin: 0;
+  position: relative;
+}
+.gallery-item figcaption {
+  font-style: italic;
+  padding: 8px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  box-sizing: border-box;
+  bottom: 3px;
+  color: #fff;
+  height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 0 0 14px 14px;
+}
+.gallery-item img {
+  width: 100%;
+  border-radius: 14px;
+}
+.gallery-item p {
+  margin: 0;
+  padding: 8px;
+}
+
+@media screen and (max-width: 500px) {
+  .gallery {
+    column-count: 1;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 700px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+@media screen and (min-width: 701px) and (max-width: 900px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        padding: 3px;
+    }
+}
+
+
+
+
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease-in-out; 
+}
+
+.gallery-item:hover {
+    transform: scale(1.07); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+figcaption {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover figcaption {
+    opacity: 1; 
+}
+
+.gallery-item p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover p {
+    opacity: 1; 
+}
+
+
+
+/* Lightbox Styling */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px); /* Apply blur effect behind the lightbox */
+}
+
+.lightbox-content {
+    position: relative;
+    background: white;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 80%;
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#lightbox-img {
+    width: 100%;
+    max-height: 60vh; /* Ensure image fits well */
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+#lightbox-desc {
+    margin-top: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Lightbox footer (like and download buttons) */
+.lightbox-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+#like-btn, #download-btn, #close-btn {
+    background-color: #FF7F50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#like-btn {
+    background-color: #ac4064; /* Instagram-like color */
+}
+
+#download-btn {
+    background-color: #4169E1;
+}
+
+#close-btn {
+    background-color: #6e6a6a;
+}
+
+/* Hover effects for buttons */
+#like-btn:hover, #download-btn:hover, #close-btn:hover {
+    background-color: #FF7F50;
+    transform: scale(1.1);
+}
+
+/* Media Queries for responsive lightbox */
+@media (max-width: 600px) {
+    .lightbox-content {
+        max-width: 95%;
+        max-height: 70%;
+        /* padding: 10px;
+        margin: 10px; */
+    }
+}
+
+
+/* Footer */
+footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer Columns */
+.footer-column {
+    flex: 1; /* Flex to distribute columns equally */
+    min-width: 200px; /* Ensures columns are readable on smaller screens */
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #007bff;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    color: #777;
+    border-top: 1px solid #ddd;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Stack columns vertically */
+        text-align: center; /* Center-align text for smaller screens */
+    }
+
+    .footer-column {
+        flex: unset; /* Remove equal distribution for better stacking */
+        min-width: 100%; /* Full width for each column */
+        margin-bottom: 15px; /* Add spacing between columns */
+    }
+
+    .footer-bottom {
+        margin-top: 10px; /* Adjust margin for smaller screens */
+    }
+}
+
+
+
+
+
+</style>
+<body>
+    
+    
+
+    <!-- Gallery Section -->
+    <section class="gallery"><div class="gallery">
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/hound-english/n02089973_3147.jpg" alt="dog" />
+            <!-- <figcaption>Picture of a few dogs having a rest and sleeping.</figcaption> -->
+          </figure>
+          <p class="image-info" >1</p>
+        </div>
+        <div class="gallery-item">
+            <figure>
+                <img src="https://images.dog.ceo/breeds/hound-english/n02089973_3147.jpg" alt="dog" />
+                <!-- <figcaption>This is a cute dog</figcaption> -->
+            </figure>
+            <p class="image-info"> 2</p>
+        </div>
+        <div id="lightbox" class="lightbox">
+            <div class="lightbox-content">
+                <img src="" alt="" id="lightbox-img">
+                <p id="lightbox-desc"></p>
+                <div class="lightbox-footer">
+                    <button id="like-btn">
+                        ❤️ Like <span id="like-count">0</span>
+                    </button>
+                    <button id="download-btn">⬇️ Download</button>
+                    <button id="close-btn">X Close</button>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/poodle-toy/n02113624_1582.jpg" alt="dog" />
+            <figcaption>3</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/pug/n02110958_13794.jpg" alt="dog" />
+            <figcaption>4</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/terrier-australian/n02096294_5504.jpg" alt="dog" />
+            <figcaption>5</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/kelpie/n02105412_1222.jpg" alt="dog" />
+            <figcaption>6</figcaption>
+          </figure>
+          <!-- <p>OMG, seriously how cute are these dogs?</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/doberman/n02107142_1193.jpg" alt="dog" />
+            <figcaption>7</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/terrier-australian/n02096294_5504.jpg" alt="dog" />
+            <figcaption>5</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/newfoundland/n02111277_5292.jpg" alt="dog" />
+            <figcaption>9</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/newfoundland/n02111277_5292.jpg" alt="dog" />
+            <figcaption>9</figcaption>
+          </figure>
+          <!-- <p>OMG, seriously how cute are these dogs?</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/newfoundland/n02111277_11806.jpg" alt="dog" />
+            <figcaption>11</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/poodle-miniature/n02113712_3293.jpg" alt="dog" />
+            <figcaption>12</figcaption>
+          </figure>
+           
+          
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/pembroke/n02113023_4881.jpg" alt="dog" />
+            <figcaption>13</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/poodle-standard/n02113799_4946.jpg" alt="dog" />
+            <figcaption>14</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+        <div class="gallery-item">
+          <figure>
+            <img src="https://images.dog.ceo/breeds/schnauzer-giant/n02097130_4050.jpg" alt="dog" />
+            <figcaption>16</figcaption>
+          </figure>
+          <!-- <p>More text about the image</p> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <!-- Left Column -->
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <!-- Middle Column -->
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+          </ul>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="footer-column">
+          <h4>Social</h4>
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; Real photos will be apear, after hosting the web page!!!
+      </div>
+    </footer>
+    <script>
+
+
+ // Get the form and success message elements
+ const form = document.getElementById('subscribeForm');
+  const successMessage = document.getElementById('successMessage');
+
+  // Add a submit event listener to the form
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Show the success message (popup)
+    successMessage.style.display = 'block';
+
+    // Hide the success message after 2 seconds (2000ms)
+    setTimeout(() => {
+      successMessage.style.display = 'none';
+    }, 2000);
+    
+    // Submit the form to Formspree
+    form.submit(); 
+  });
+
+
+
+
+
+
+
+
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // Or any other email service you use
+  auth: {
+    user: 'sangawatjayram@gmail.com',
+    pass: 'hi@jayram@9421'
+  }
+});
+
+app.post('/subscribe', (req, res) => {
+  const email = req.body.email;
+  
+  const mailOptions = {
+    from: 'your-email@gmail.com',
+    to: 'sangawatjayram@gmail.com', // Your email
+    subject: 'New Subscriber',
+    text: `You have a new subscriber: ${email}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.send('Error sending email');
+    }
+    res.send('Subscription successful!');
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+
+
+
+
+
+
+
+
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxDesc = document.getElementById('lightbox-desc');
+const likeBtn = document.getElementById('like-btn');
+const likeCount = document.getElementById('like-count');
+const downloadBtn = document.getElementById('download-btn');
+const closeBtn = document.getElementById('close-btn');
+
+// Open lightbox when clicking on an image
+galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const imgSrc = item.querySelector('img').src;
+        const imgDesc = item.querySelector('figcaption').innerText;
+        
+        // Set image source and description in the lightbox
+        lightboxImg.src = imgSrc;
+        lightboxDesc.innerText = imgDesc;
+        
+        // Display the lightbox
+        lightbox.style.display = 'flex';
+    });
+});
+
+// Close lightbox when clicking the close button
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+// Handle like button click (Instagram-like functionality)
+likeBtn.addEventListener('click', () => {
+    let count = parseInt(likeCount.innerText);
+    likeCount.innerText = count + 1;
+});
+
+// Handle download button functionality
+downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.href = lightboxImg.src;
+    link.download = 'image.jpg'; // Set the image download file name
+    link.click();
+});
+
+
+
+document.addEventListener('mousemove', function(e) {
+    const header = document.querySelector('header');
+
+    // Get the position of the mouse relative to the top of the page
+    const mouseY = e.clientY;
+
+    // If the mouse is within 50px of the top of the screen, show the navbar
+    if (mouseY < 50) {
+        header.classList.remove('hidden'); // Show navbar
+    } else {
+        header.classList.add('hidden'); // Hide navbar
+    }
+});
+
+    </script>
+</body>
+</html>

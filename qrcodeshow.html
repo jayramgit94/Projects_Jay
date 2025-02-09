@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+
+
+ <!-- Prism.js for Highlighting -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+ <!-- Fira Code Font -->
+ <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+
+.code-description {
+    font-family: 'arvo', cursive;
+    font-size: 20px;
+}
+
+
+.heading , .snippet-card {
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            
+        }
+       :root {
+    /* Light Theme Colors */
+    --bg-color-light: #f9f6fe; /* Pure white */
+    --text-color-light: #4a4a4a; /* Soft dark gray */
+    --card-bg-light: #fdfbef; /* Light lavender */
+    --code-bg-light: #eef0f7; /* Subtle cool gray */
+    --primary-color: #6651ea; /* Soft periwinkle */
+    --secondary-color: #ff6f61; /* Muted coral */
+    --accent-color: #40b6e7; /* Delicate pastel blue */
+    --footer-bg-light: #f5f5f8; /* Light gray for footer */
+    --footer-text-color-light: #7a7a85; /* Muted gray text */
+    --container-bg-dark: #24273e;    /* Dark Theme Colors */
+
+
+
+    
+    --bg-color-dark: #1d1d31; /* Deep navy */
+    --text-color-dark: #8d2f2f; /* Almost white */
+    --card-bg-dark: #222237; /* Dark slate */
+    --code-bg-dark: #282845; /* Midnight blue-gray */
+    --primary-color-dark: #c3a4ff; /* Lavender mist */
+    --secondary-color-dark: #ff867f; /* Peach pink */
+    --accent-color-dark: #87ceeb; /* Sky blue */
+    --footer-bg-dark: #1f1f31; /* Deep slate for footer */
+    --container-bg-light: #F8F9FA;
+
+       }
+
+       /* Light Theme */
+body.light-theme {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+
+.snippet-card {
+    background-color: var(--card-bg-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+pre {
+    background-color: var(--code-bg-light);
+    color: var(--text-color-light);
+}
+
+/* Light Theme */
+body.light-theme .container {
+    background-color: var(--container-bg-light);
+}
+
+/* Dark Theme */
+body.dark-theme .container {
+    background-color: var(--container-bg-dark);
+}
+
+
+
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+.snippet-card {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+pre {
+    background-color: var(--code-bg-dark);
+    color: var(--text-color-dark);
+}
+
+
+
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            /* background-color: #f4f4f9; */
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+
+        }
+
+        .snippet-card {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+pre {
+    background-color: var(--code-bg-dark);
+    color: var(--text-color-dark);
+}
+
+/* Buttons */
+.lang-button, .copy-button, .theme-toggle {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    padding: 8px 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.lang-button:hover, .copy-button:hover, .theme-toggle:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(9, 1, 1, 0.1);
+            overflow: hidden;
+            
+        }
+            
+        
+
+        .left-section, .right-section {
+            padding: 20px;
+            width: 100%;
+        }
+
+        .left-section {
+            /* background-color: #f9f9f9; */
+            /* border-right: 1px solid #ddd; */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .heading {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .snippet-card{
+            background-color: var(--card-bg-light);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden; /* Ensures the card itself doesn't overflow */
+            
+        }
+        /* Syntax highlighting for HTML tags */
+pre code {
+    color: #f8f8f2; /* General text color */
+}
+
+pre code .tag {
+    color: #FF79C6; /* Pink for HTML tags */
+}
+
+pre code .attribute {
+    color: #FFB86C; /* Orange for attributes */
+}
+
+pre code .value {
+    color: #50FA7B; /* Green for attribute values */
+}
+
+        .snippet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        pre {
+            background-color: #1b1b1b; /* Dark background */
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', monospace; /* Custom font */
+            font-size: 16px;
+            color:#dad8e4;
+            font: bold;
+              /* Enable both vertical and horizontal scrolling */
+    overflow: auto; 
+    max-height: 400px; 
+    max-width: 100%;  
+    /* white-space: pre-wrap; 
+    word-wrap: break-word; */
+            
+
+        }
+
+        .footer-buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .code-description {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        .lang-button {
+            background: var(--accent-color);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.2s ease;
+        }
+
+        .lang-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .copy-button {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.2s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--secondary-color);
+        }
+
+   /* Right Section */
+.right-section {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+/* Screenshot Placeholder Styling */
+.screenshot-placeholder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Styling for each screenshot */
+.project-screenshot {
+    width: 100%;
+    max-width: 200px; /* Images will be constrained to 200px width */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.project-screenshot:hover {
+    transform: scale(1.05);
+}
+
+/* Modal Styling for Clicked Image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    animation: zoomIn 0.3s ease-in-out;
+}
+
+/* Close button style */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Animation for modal fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animation for zoom-in effect on modal image */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Media Query for Smaller Devices */
+@media (max-width: 768px) {
+    .project-screenshot {
+        max-width: 150px;
+    }
+}
+
+
+    </style>
+    
+
+
+
+
+
+</head>
+<body class="light-theme">
+    <button class="theme-toggle">Toggle Theme</button>
+    <div class="container">
+        <!-- Left Section: Code Snippets -->
+        <div class="left-section">
+
+
+
+
+            <h1 class="heading">Project Showcase</h1>
+            <h1 class="heading">Text to QR</h1>
+  <div class="snippet-card">
+                <h2>HTML</h2>
+                <pre><code>
+                    &lt;div class="qrcontainer"&gt;
+                        &lt;p&gt Enter your text or URL &lt;/p&gt;
+                        &lt;input type="text" placeholder="Text or URL" id="qrtext"&gt;
+                        &lt;div class="imgbox"&gt;
+                            &lt;img src="" id="qrImage"&gt;
+                        &lt;/div&gt;
+                        &lt;button onclick="generateQR()"&gt; Generate QR code &lt;/button&gt;
+                    &lt;/div&gt;
+                </code></pre>
+                <button class="lang-button">HTML</button>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                <p class="code-description">This Python snippet demonstrates how to create a dictionary from two lists.</p>
+            </div>
+            
+
+            <!-- C++ Code Snippet -->
+
+
+            <div class="snippet-card">
+                <h2>CSS Code</h2>
+               <!-- CSS Code Showcase -->
+    <div class="snippet-card">
+        <h2>CSS</h2>
+        <pre><code class="language-css">
+            
+                * {
+                    margin: 0;
+                    padding: 0;
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                    box-sizing: border-box;
+        
+                }
+        
+                body {
+                    background-color:  rgba(17, 69, 223, 0.3);
+                    
+                }
+        
+                .qrcontainer {
+                    width: 480px;
+                    padding: 25px 35px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #ffeeff;
+                    border-radius: 10px;
+                    box-shadow: 10px 10px 10px rgba(17, 62, 223, 0.3);
+        
+        
+                }
+        
+                .qrcontainer p {
+                    font-weight: 600;
+                    font-size: 15px;
+                    margin-bottom: 8px;
+                    
+        
+                }
+        
+                .qrcontainer input {
+                    width: 100%;
+                    height: 50px;
+                    border: 1px solid#3d1d96 ;
+                    outline: 0;
+                    padding: 10px  20px;
+                    border-radius: 5px;
+                    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        
+                }
+                .qrcontainer button{
+                    width: 100%;
+                    height: 50px;
+                    background: #494eea;
+                    color : #fff;
+                    border: 0;
+                    outline: 0;
+                    border-radius: 5px;
+                    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+                    cursor: pointer;
+                    margin: 20px 0;
+                }
+        
+            
+        </code></pre>
+
+                <button class="lang-button">CSS</button>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+
+                <p class="code-description">This C++ snippet shows how to create a dictionary-like structure using `std::map`.</p>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- JavaScript Code Snippet -->
+            <div class="snippet-card">
+                <h2>JavaScript Code</h2>
+                <pre><code class="language-javascript">
+  let imgbox = document.getElementById("imgbox");
+        let qrImage = document.getElementById("qrImage");
+        let qrtext = document.getElementById("qrtext");
+
+        function generateQR(){
+            qrImage.src= " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrtext.value;
+        }
+   
+                </code></pre>
+                <button class="lang-button">JavaScript</button>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+
+                <p class="code-description">This JavaScript code generates a dictionary object from arrays.</p>
+            </div>
+
+
+
+        <!-- Right Section: Screenshot -->
+     <!-- Right Section: Screenshot -->
+<div class="right-section">
+    <div class="screenshot-placeholder">
+        <img src="./assets/images/textqr1.png" alt="Screenshot 1" class="project-screenshot">
+        <img src="./assets/images/textqr2.png" alt="Screenshot 2" class="project-screenshot">
+        <!-- <img src="screenshot3.jpg" alt="Screenshot 3" class="project-screenshot"> -->
+    </div>
+</div>
+<!-- Modal to View Image -->
+<div id="imageModal" class="modal" onclick="closeImage()">
+    <span class="close-btn" onclick="closeImage()">X</span>
+    <img id="modalImage" class="modal-content" src="">
+</div>
+
+
+    
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <script>
+        const toggleThemeBtn = document.querySelector('.theme-toggle');
+        const body = document.body;
+
+        toggleThemeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            body.classList.toggle('light-theme');
+        });
+
+        function copyCode(button) {
+            const code = button.closest('.snippet-card').querySelector('pre').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => (button.innerText = 'Copy'), 2000);
+            });
+        }
+
+
+
+
+
+
+        // for images
+
+        // Function to open image in modal
+function openImage(imgElement) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    modal.style.display = "flex";
+    modalImg.src = imgElement.src;
+}
+
+// Function to close the modal
+function closeImage() {
+    const modal = document.getElementById("imageModal");
+    modal.style.display = "none";
+}
+
+    </script>
+
+    
+
+</body>
+</html>
