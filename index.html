@@ -250,6 +250,29 @@ p {
 
 
 
+* Button styling */
+        .form-button .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-button .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-button .btn i {
+            font-size: 18px;
+        }
+
+
 
 </style>
 <body>
@@ -259,221 +282,80 @@ p {
 	
     <main class="grid">
         <section class="content item1">
-            <h1>Small Projects</h1>
+            <h1>Small CODEs</h1>
             <p>By animating a few CSS paint & composite properties, we can create fun interactions on hover & focus</p> 
         </section>
         <section class="card item2">
-            <h2>
-				
-				Qr_Code.html<h2></h2>
-				
-				
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
-					<!-- Gradient Definitions -->
-					<defs>
-					  <linearGradient id="QGradient" x1="0" y1="0" x2="1" y2="1">
-						<stop offset="0%" stop-color="#34ebba" />
-						<stop offset="100%" stop-color="#24968b" />
-					  </linearGradient>
-					  <linearGradient id="RGradient" x1="1" y1="0" x2="0" y2="1">
-						<stop offset="0%" stop-color="#ff8e3c" />
-						<stop offset="100%" stop-color="#d65016" />
-					  </linearGradient>
-					</defs>
-				  
-					<!-- QR Code Block -->
-					<rect x="5" y="5" width="40" height="40" fill="url(#QGradient)" />
-					<rect x="55" y="5" width="40" height="40" fill="url(#RGradient)" />
-					<rect x="105" y="5" width="30" height="30" fill="url(#QGradient)" />
-					<rect x="5" y="55" width="30" height="30" fill="url(#RGradient)" />
-					<rect x="40" y="40" width="60" height="60" fill="url(#QGradient)" />
-				  </svg>
-				  
-				
-				
+            <h2>Logo</h2>
+            <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
         </section>
         <section class="card item3">
-		
-			
-			
-			
-			<h1>
-				Logo
-			</h1>
-			
-			
-			<svg role="img" aria-label="Stylized 'JS' logo" viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg">
-				<!-- Gradient Definitions -->
-				<defs>
-				  <linearGradient id="JGradient" x1="0" y1="0" x2="1" y2="1">
-					<stop offset="0%" stop-color="#ff7f50" />
-					<stop offset="100%" stop-color="#ff4500" />
-				  </linearGradient>
-				  <linearGradient id="SGradient" x1="1" y1="0" x2="0" y2="1">
-					<stop offset="0%" stop-color="#00c9ff" />
-					<stop offset="100%" stop-color="#92fe9d" />
-				  </linearGradient>
-				  <radialGradient id="BackgroundGradient" cx="50%" cy="50%" r="70%">
-					<stop offset="0%" stop-color="#ffffff" />
-					<stop offset="100%" stop-color="#d3d3d3" />
-				  </radialGradient>
-				</defs>
-			  
-				<!-- Background -->
-				<!-- <rect width="100%" height="100%" fill="url(#BackgroundGradient)" /> -->
-			  
-				<!-- Opposite Letter J -->
-				<g>
-				  <path d="M20 10 h40 v50 a10 10 0 0 1 -10 10 h-20 a10 10 0 0 1 -10 -10" fill="url(#JGradient)" />
-				  <path d="M20 10 h40" stroke="#ff4500" stroke-width="3" />
-				</g>
-			  
-				<!-- Opposite Letter S -->
-				<g>
-				  <path d="M90 10 h-20 a10 10 0 0 0 -10 10 v10 a10 10 0 0 0 10 10 h20 a10 10 0 0 1 10 10 v10 a10 10 0 0 1 -10 10 h-20" fill="url(#SGradient)" />
-				  <path d="M90 10 h-20" stroke="#00c9ff" stroke-width="3" />
-				</g>
-			  </svg>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		</section>
-        <section class="card item4"><h2>Table_of_number.html</h2>
-			<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" role="img" aria-label="Matrix-style Table QR-inspired logo">
-				<rect width="140" height="140" fill="#ECEFF1" />
-			  
-				<rect x="10" y="10" width="30" height="30" fill="#64B5F6" />
-				<text x="25" y="30" font-size="12" text-anchor="middle" fill="#FFFFFF" font-family="Arial">5</text>
-			  
-				<rect x="50" y="10" width="30" height="30" fill="#7986CB" />
-				<text x="65" y="30" font-size="12" text-anchor="middle" fill="#FFFFFF" font-family="Arial">6</text>
-			  
-				<rect x="90" y="10" width="30" height="30" fill="#FFB74D" />
-				<text x="105" y="30" font-size="12" text-anchor="middle" fill="#FFFFFF" font-family="Arial">7</text>
-			  
-				<rect x="10" y="50" width="40" height="40" fill="#4DD0E1" />
-				<text x="30" y="75" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="Arial">8</text>
-			  
-				<rect x="60" y="60" width="40" height="40" fill="#BA68C8" />
-				<text x="80" y="90" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="Arial">9</text>
-			  </svg>
-			   -->
-
-			
-		
-		</section>
-        <section class="card item5">
-                <h2>Weather.html<h2>
-
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
-						<!-- Gradient Definitions -->
-						<defs>
-						  <linearGradient id="RainGradient" x1="0" y1="0" x2="1" y2="1">
-							<stop offset="0%" stop-color="#4682B4" />
-							<stop offset="100%" stop-color="#1E90FF" />
-						  </linearGradient>
-						  <linearGradient id="LightningGradient" x1="1" y1="0" x2="0" y2="1">
-							<stop offset="0%" stop-color="#FFD700" />
-							<stop offset="100%" stop-color="#FF4500" />
-						  </linearGradient>
-						</defs>
-					  
-						<!-- Rainy Block -->
-						<rect x="10" y="10" width="40" height="40" fill="url(#RainGradient)" />
-						<path d="M25 20 l5 10 -10 -5 10 -5 -5 10 Z" fill="#FFF" />
-					  
-						<!-- Lightning Block -->
-						<rect x="60" y="10" width="40" height="40" fill="url(#LightningGradient)" />
-						<path d="M75 20 l10 15 -15 -5 15 -5 -10 15 Z" fill="#FFF" />
-					  
-						<!-- QR-Inspired Blocks -->
-						<rect x="10" y="60" width="30" height="30" fill="url(#RainGradient)" />
-						<rect x="60" y="60" width="40" height="40" fill="url(#LightningGradient)" />
-						<rect x="100" y="10" width="30" height="30" fill="url(#RainGradient)" />
-					  </svg>
-					  
+            <h2>Table_of_number.html</h2>
+            <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
         </section>
+        <section class="card item4">
+            <h2>Weather.html</h2>
+            <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
+        </section>
+		
         <section class="card item7"></section>
-        <section class="card item8">
+        <section class="card item8" onclick="">
                 <h2>Pomodro.html<h2>
+					 <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
         </section>
         <section class="card item9"></section>
-        <section class="card item10"><h2>Log_in_page.html</h2>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
-				<!-- Gradient Definitions -->
-				<defs>
-				  <linearGradient id="RainGradient" x1="0" y1="0" x2="1" y2="1">
-					<stop offset="0%" stop-color="#4682B4" />
-					<stop offset="100%" stop-color="#1E90FF" />
-				  </linearGradient>
-				  <linearGradient id="LightningGradient" x1="1" y1="0" x2="0" y2="1">
-					<stop offset="0%" stop-color="#FFD700" />
-					<stop offset="100%" stop-color="#FF4500" />
-				  </linearGradient>
-				</defs>
-			  
-				<!-- Rainy Block -->
-				<rect x="10" y="10" width="40" height="40" fill="url(#RainGradient)" />
-				<path d="M25 20 l5 10 -10 -5 10 -5 -5 10 Z" fill="#FFF" />
-			  
-				<!-- Lightning Block -->
-				<rect x="60" y="10" width="40" height="40" fill="url(#LightningGradient)" />
-				<path d="M75 20 l10 15 -15 -5 15 -5 -10 15 Z" fill="#FFF" />
-			  
-				<!-- QR-Inspired Blocks -->
-				<rect x="10" y="60" width="30" height="30" fill="url(#RainGradient)" />
-				<rect x="60" y="60" width="40" height="40" fill="url(#LightningGradient)" />
-				<rect x="100" y="10" width="30" height="30" fill="url(#RainGradient)" />
-			  </svg>
-			  
+		<section class="card item10" onclick="window.location.href='/CODEs_Jay/loginpage.html'">
+			<h2>Log_in_page.html</h2>
+			 <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
 		</section>
+		
         <section class="card item11">
-            <h2>Return Homee!<h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
-				<!-- Gradient Definitions -->
-				<defs>
-				  <linearGradient id="RainGradient" x1="0" y1="0" x2="1" y2="1">
-					<stop offset="0%" stop-color="#4682B4" />
-					<stop offset="100%" stop-color="#1E90FF" />
-				  </linearGradient>
-				  <linearGradient id="LightningGradient" x1="1" y1="0" x2="0" y2="1">
-					<stop offset="0%" stop-color="#FFD700" />
-					<stop offset="100%" stop-color="#FF4500" />
-				  </linearGradient>
-				</defs>
-			  
-				<!-- Rainy Block -->
-				<rect x="10" y="10" width="40" height="40" fill="url(#RainGradient)" />
-				<path d="M25 20 l5 10 -10 -5 10 -5 -5 10 Z" fill="#FFF" />
-			  
-				<!-- Lightning Block -->
-				<rect x="60" y="10" width="40" height="40" fill="url(#LightningGradient)" />
-				<path d="M75 20 l10 15 -15 -5 15 -5 -10 15 Z" fill="#FFF" />
-			  
-				<!-- QR-Inspired Blocks -->
-				<rect x="10" y="60" width="30" height="30" fill="url(#RainGradient)" />
-				<rect x="60" y="60" width="40" height="40" fill="url(#LightningGradient)" />
-				<rect x="100" y="10" width="30" height="30" fill="url(#RainGradient)" />
-			  </svg>
+            <h2>Return Homee!<h2>
         </section>
 		<section class="card item12">
 			<h2>Pomodro.html<h2>
+				 <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
 	</section>
 		<section class="card item13"></section>
 		<section class="card item14">
 			<h2>Pomodro.html<h2>
+				 <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
 
 	</section>
 		<section class="card item15">
 			<h2>Pomodro.html<h2>
+				 <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
 	</section>
 		<section class="card item16">
 			<h2>Pomodro.html<h2>
+				 <div class="buttons">
+                <button class="btn Project-btn">Project</button>
+                <button class="btn CODE-btn">CODE</button>
+            </div>
 	</section>
 	<section class="card item17"></section>
 	<section class="card item18"></section>
@@ -495,7 +377,9 @@ p {
   }, 1000); // Adjust the time as per your needs (in milliseconds)
 };
 
-
+function openCODE(path) {
+            window.location.href = path; // Replace with actual paths
+        }
 
 
 	</script>

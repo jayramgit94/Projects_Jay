@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math & Conversion Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        nav {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        select, input, button {
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+        }
+
+        #output {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            select, input, button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Math & Conversion Tool</h1>
+        <select id="operation">
+            <option value="multiplication">Multiplication Table</option>
+            <option value="square">Square of Number</option>
+            <option value="cube">Cube of Number</option>
+            <!-- <option value="bmi">BMI Calculator</option> -->
+            <option value="currency">Currency Conversion (USD to INR)</option>
+            <option value="length">Length Conversion (Meters to Kilometers)</option>
+            <option value="weight">Weight Conversion (Grams to Kilograms)</option>
+        </select>
+        <input type="number" id="numberInput" placeholder="Enter a number">
+        <button onclick="performOperation()">Calculate</button>
+        <div id="output"></div>
+    </div>
+    <script>
+        function performOperation() {
+            const operation = document.getElementById('operation').value;
+            const number = parseFloat(document.getElementById('numberInput').value);
+            const output = document.getElementById('output');
+            output.innerHTML = ''; // Clear previous output
+
+            if (isNaN(number) && operation !== 'bmi') {
+                output.innerHTML = 'Please enter a valid number.';
+                return;
+            }
+
+            switch (operation) {
+                case 'multiplication':
+                    let table = '<table>';
+                    for (let i = 1; i <= 10; i++) {
+                        table += `<tr><td>${number} x ${i} = ${number * i}</td></tr>`;
+                    }
+                    table += '</table>';
+                    output.innerHTML = table;
+                    break;
+
+                case 'square':
+                    output.innerHTML = `Square of ${number} is ${number ** 2}.`;
+                    break;
+
+                case 'cube':
+                    output.innerHTML = `Cube of ${number} is ${number ** 3}.`;
+                    break;
+
+                case 'bmi':
+                    const weight = parseFloat(prompt('Enter your weight in kg:'));
+                    const height = parseFloat(prompt('Enter your height in meters:'));
+                    if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                        output.innerHTML = 'Please enter valid weight and height.';
+                    } else {
+                        const bmi = (weight / (height ** 2)).toFixed(2);
+                        output.innerHTML = `Your BMI is ${bmi}.`;
+                    }
+                    break;
+
+                case 'currency':
+                    const convertedCurrency = (number * 82.5).toFixed(2); // Example conversion rate
+                    output.innerHTML = `${number} USD is approximately ₹${convertedCurrency}.`;
+                    break;
+
+                case 'length':
+                    const length = (number / 1000).toFixed(3);
+                    output.innerHTML = `${number} meters is ${length} kilometers.`;
+                    break;
+
+                case 'weight':
+                    const weightConverted = (number / 1000).toFixed(3);
+                    output.innerHTML = `${number} grams is ${weightConverted} kilograms.`;
+                    break;
+
+                default:
+                    output.innerHTML = 'Please select a valid operation.';
+            }
+        }
+    </script>
+</body>
+</html>
